@@ -13,14 +13,27 @@ import android.view.View.OnTouchListener
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 
-class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener{
+@GlideModule
+public final class MyAppGlideModule : AppGlideModule()
+
+class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener,
+    GestureDetector.OnDoubleTapListener {
 
     lateinit var txv:TextView
     lateinit var gDetector: GestureDetector
     var count:Int = 0
     lateinit var img1: ImageView
     lateinit var img2: ImageView
+    lateinit var img3: ImageView
+    lateinit var img4: ImageView
+    lateinit var img5: ImageView
+
+    var size:Float = 30f
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +42,21 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener{
 
         img1 = findViewById(R.id.img1)
         img2 = findViewById(R.id.img2)
+        img3 = findViewById(R.id.img3)
         img1.setOnTouchListener(this)
         img2.setOnTouchListener(this)
+        img3.setOnTouchListener(this)
+
+        img4 = findViewById(R.id.img4)
+        img4.visibility=View.GONE
+        Glide.with(this)
+            .load(R.drawable.happy)
+            .into(img4)
+
+        img5 = findViewById(R.id.img5)
+        img5.visibility=View.GONE
+
+
 
         txv = findViewById(R.id.txv)
         txv.setTextColor(Color.parseColor("#eeee00"))
@@ -42,6 +68,21 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener{
         gDetector=GestureDetector(this,this)
 
     }
+
+    fun snake(v:View){
+        val txv:TextView = findViewById<TextView>(R.id.txv)
+        if (size<50){
+            size++
+            findViewById<TextView>(R.id.txv).setTextSize(size)
+            txv.setTextSize(size)
+            var cake:String
+            cake="泡芙、芋圓、冰淇淋"
+            txv.setText(cake)
+
+        }
+
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (txv.text == "手勢辨別"){
             txv.text = "靜宜之美"
@@ -52,6 +93,7 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener{
         gDetector.onTouchEvent(event)
         return true
     }
+
 
 
     override fun onDown(p0: MotionEvent): Boolean {
@@ -88,22 +130,25 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener{
         if (e1.x <= e2.x){
             txv.text = "往右快滑"
             count++
-            if(count>5){count=0}
+            if(count>6){count=0}
         }
         else{
             txv.text = "往左快滑"
             count--
-            if(count<0){count=5}
+            if(count<0){count=6}
         }
         var res:Int = getResources().getIdentifier("pu" + count.toString(),
             "drawable", getPackageName())
-        findViewById<LinearLayout>(R.id.bg).setBackgroundResource(res)
+        findViewById<ConstraintLayout>(R.id.bg).setBackgroundResource(res)
         return true
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         if (v==img1){
             txv.text = "精靈1"
+        }
+        else if (v==img3){
+            txv.text = "What's your name?"
         }
         else{
             txv.text = "精靈2"
@@ -116,12 +161,37 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener{
             img1.x.toInt() + img1.width, img1.y.toInt() + img1.height)
         var r2: Rect = Rect(img2.x.toInt(), img2.y.toInt(),
             img2.x.toInt() + img2.width, img2.y.toInt() + img2.height)
-
+        var r3: Rect = Rect(img3.x.toInt(), img3.y.toInt(),
+            img2.x.toInt() + img3.width, img3.y.toInt() + img3.height)
         if(r1.intersect(r2)) {
-            txv.text = "碰撞"
+            txv.text = "交個朋友吧!\uD83D\uDE09"
+            img4.visibility=View.VISIBLE
+        }
+        if(r1.intersect(r3)){
+            txv.text = "My name is 陳咨穎"
+            img5.visibility=View.VISIBLE
+        }
+        if(r2.intersect(r3)){
+            txv.text = "My name is 陳咨穎"
+            img5.visibility=View.VISIBLE
         }
 
 
+        return true
+    }
+
+    override fun onSingleTapConfirmed(p0: MotionEvent): Boolean {
+        txv.text="快按兩下"
+        img4.visibility=View.GONE
+        img5.visibility=View.GONE
+        return true
+    }
+
+    override fun onDoubleTap(p0: MotionEvent): Boolean {
+        return true
+    }
+
+    override fun onDoubleTapEvent(p0: MotionEvent): Boolean {
         return true
     }
 }
