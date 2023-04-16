@@ -10,6 +10,43 @@
     tools:context=".MainActivity"
     >
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="txv1,txv2,txv3"
+        app:flow_horizontalStyle="spread"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.963" />
+
+    <TextView
+        android:id="@+id/txv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:text="台灣人"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="就讀靜宜大學"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="資訊管理學系"
+        tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/txv"
@@ -24,11 +61,23 @@
         />
 
     <ImageView
+        android:id="@+id/imgyear"
+        android:layout_width="391dp"
+        android:layout_height="448dp"
+        app:layout_constraintBottom_toBottomOf="@+id/flow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.546"
+        app:srcCompat="@drawable/year" />
+
+    <ImageView
         android:id="@+id/img1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="76dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txv"
         app:srcCompat="@drawable/ghost1" />
@@ -37,9 +86,9 @@
         android:id="@+id/img2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="176dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ghost2" />
@@ -49,50 +98,109 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@android:color/background_light"
         android:onClick="snake"
         android:text="喜愛的食物"
+        android:textColor="@color/black"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"
-        android:backgroundTint="@android:color/background_light"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img3"
         android:layout_width="213dp"
         android:layout_height="153dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="412dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="392dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img3" />
 
     <ImageView
         android:id="@+id/img4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="232dp"
+        android:layout_width="415dp"
+        android:layout_height="364dp"
         android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/flow"
+        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/happy"
-
-        />
+        app:layout_constraintVertical_bias="0.597"
+        app:srcCompat="@drawable/happy" />
 
     <ImageView
         android:id="@+id/img5"
-        android:layout_width="373dp"
-        android:layout_height="580dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="389dp"
+        android:layout_height="481dp"
+        app:layout_constraintBottom_toBottomOf="@+id/flow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.894"
+        app:layout_constraintVertical_bias="0.835"
         app:srcCompat="@drawable/picture" />
+
+    <Button
+        android:id="@+id/exe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我的興趣!"
+        app:layout_constraintBottom_toBottomOf="@+id/txv1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txv"
+        app:layout_constraintVertical_bias="0.92" />
+
+    <Button
+        android:id="@+id/old"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="今年幾歲了?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.887" />
+
+    <ImageView
+        android:id="@+id/imgbadmi"
+        android:layout_width="252dp"
+        android:layout_height="230dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img4"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="@+id/imgyear"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.219"
+        app:srcCompat="@drawable/badminton" />
+
+    <ImageView
+        android:id="@+id/imgbyc"
+        android:layout_width="199dp"
+        android:layout_height="190dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toStartOf="@+id/imgyear"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857"
+        app:srcCompat="@drawable/imgbycicle" />
+
+    <ImageView
+        android:id="@+id/imgmui"
+        android:layout_width="235dp"
+        android:layout_height="239dp"
+        app:layout_constraintBottom_toBottomOf="@+id/flow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.558"
+        app:srcCompat="@drawable/music" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,15 +3,17 @@ package tw.edu.pu.csim.zuying.example.goodhwk
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.Typeface
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.GestureDetector.OnGestureListener
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.View.OnTouchListener
+import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
@@ -22,16 +24,28 @@ import com.bumptech.glide.module.AppGlideModule
 public final class MyAppGlideModule : AppGlideModule()
 
 class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener,
-    GestureDetector.OnDoubleTapListener {
+    GestureDetector.OnDoubleTapListener, OnClickListener{
 
     lateinit var txv:TextView
     lateinit var gDetector: GestureDetector
+    lateinit var old: Button
+    lateinit var exe:Button
+    lateinit var mper:MediaPlayer
+
+
+
+
     var count:Int = 0
+
     lateinit var img1: ImageView
     lateinit var img2: ImageView
     lateinit var img3: ImageView
     lateinit var img4: ImageView
     lateinit var img5: ImageView
+    lateinit var imgyear: ImageView
+    lateinit var imgbadmi: ImageView
+    lateinit var imgbyc: ImageView
+    lateinit var imgmui: ImageView
 
     var size:Float = 30f
 
@@ -40,22 +54,59 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         img1 = findViewById(R.id.img1)
         img2 = findViewById(R.id.img2)
         img3 = findViewById(R.id.img3)
+        imgbadmi = findViewById(R.id.imgbadmi)
+        imgbyc = findViewById(R.id.imgbyc)
+        imgmui = findViewById(R.id.imgmui)
+        imgmui.setOnTouchListener(this)
         img1.setOnTouchListener(this)
         img2.setOnTouchListener(this)
         img3.setOnTouchListener(this)
+        imgbadmi.setOnTouchListener(this)
+        imgbyc.setOnTouchListener(this)
+
+        old = findViewById(R.id.old)
+        old.setOnClickListener(this)
+        exe = findViewById(R.id.exe)
+        exe.setOnClickListener(this)
 
         img4 = findViewById(R.id.img4)
         img4.visibility=View.GONE
         Glide.with(this)
             .load(R.drawable.happy)
+            .circleCrop()
             .into(img4)
+        mper = MediaPlayer()
+        mper = MediaPlayer.create(this, R.raw.scenario)
+        mper.start()
+
 
         img5 = findViewById(R.id.img5)
         img5.visibility=View.GONE
 
+        imgyear = findViewById(R.id.imgyear)
+        imgyear.visibility=View.GONE
+
+        imgbyc = findViewById(R.id.imgbyc)
+        imgbyc.visibility=View.GONE
+        Glide.with(this)
+            .load(R.drawable.imgbycicle)
+            .into(imgbyc)
+
+        imgbadmi = findViewById(R.id.imgbadmi)
+        imgbadmi.visibility=View.GONE
+        Glide.with(this)
+            .load(R.drawable.badminton)
+            .into(imgbadmi)
+
+        imgmui = findViewById(R.id.imgmui)
+        imgmui.visibility=View.GONE
+        Glide.with(this)
+            .load(R.drawable.music)
+            .into(imgmui)
 
 
         txv = findViewById(R.id.txv)
@@ -82,6 +133,7 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener,
         }
 
     }
+
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (txv.text == "手勢辨別"){
@@ -123,6 +175,7 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener,
 
     override fun onLongPress(p0: MotionEvent) {
         txv.text = "長按"
+
 
     }
 
@@ -184,6 +237,14 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener,
         txv.text="快按兩下"
         img4.visibility=View.GONE
         img5.visibility=View.GONE
+        imgyear.visibility=View.GONE
+        imgmui.visibility=View.GONE
+        imgbadmi.visibility=View.GONE
+        imgbyc.visibility=View.GONE
+        img1.visibility=View.VISIBLE
+        img2.visibility=View.VISIBLE
+        img3.visibility=View.VISIBLE
+
         return true
     }
 
@@ -193,5 +254,25 @@ class MainActivity : AppCompatActivity() ,OnGestureListener,OnTouchListener,
 
     override fun onDoubleTapEvent(p0: MotionEvent): Boolean {
         return true
+    }
+
+    override fun onClick(v: View?) {
+        if (v==old){
+            imgyear.visibility=View.VISIBLE
+            img1.visibility=View.GONE
+            img2.visibility=View.GONE
+            img3.visibility=View.GONE
+        }
+        if (v==exe){
+            imgmui.visibility=View.VISIBLE
+            imgbadmi.visibility=View.VISIBLE
+            imgbyc.visibility=View.VISIBLE
+            img1.visibility=View.GONE
+            img2.visibility=View.GONE
+            img3.visibility=View.GONE
+        }
+
+
+
     }
 }
